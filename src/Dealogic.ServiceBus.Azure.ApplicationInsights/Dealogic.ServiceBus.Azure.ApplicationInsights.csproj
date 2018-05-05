@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>dealogic.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Dealogic, Team Lambda</Authors>
+    <Company>Dealogic</Company>
+    <Description>Service Bus Application Insights helper classes. For usage please see readme.md in the repository.</Description>
+    <Copyright>© 2018 Dealogic</Copyright>
+    <RepositoryUrl>https://github.com/Dealogic/azure-servicebus-appinsights.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>ServiceBus azure ApplicationInsights AppInsights</PackageTags>
+    <PackageProjectUrl>https://github.com/Dealogic/azure-servicebus-appinsights.git</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\Dealogic.ServiceBus.Azure.ApplicationInsights.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\Dealogic.ServiceBus.Azure.ApplicationInsights.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.5.1" />
+    <PackageReference Include="microsoft.azure.servicebus" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>
