@@ -65,7 +65,6 @@
             {
                 this.telemetryClient.StopOperation(this.operationHolder);
                 this.operationHolder.Dispose();
-                GC.SuppressFinalize(this);
             }
         }
     }
