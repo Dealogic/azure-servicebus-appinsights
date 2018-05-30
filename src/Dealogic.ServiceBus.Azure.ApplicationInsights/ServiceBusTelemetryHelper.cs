@@ -32,7 +32,6 @@
         /// </summary>
         public const string EnqueueOperationName = "Enqueue";
 
-        private readonly TelemetryClient telemetryClient;
         private readonly Uri endpointUri;
 
         /// <summary>
@@ -60,13 +59,13 @@
                 throw new ArgumentException("Service Bus connection string is null or empty.", nameof(serviceBusConnectionString));
             }
 
-            this.telemetryClient = telemetryClient ?? new TelemetryClient();
+            this.TelemetryClient = telemetryClient ?? new TelemetryClient();
             var connectionStringBuilder = new ServiceBusConnectionStringBuilder(serviceBusConnectionString);
             this.endpointUri = new Uri(connectionStringBuilder.Endpoint);
         }
 
         /// <inheritdoc/>
-        public TelemetryClient TelemetryClient => telemetryClient;
+        public TelemetryClient TelemetryClient { get; }
 
         /// <inheritdoc/>
         public bool TrackException { get; set; } = true;
@@ -85,7 +84,7 @@
                 throw new ArgumentException("Entity path is null or empty.", nameof(entityPath));
             }
 
-            var operation = this.telemetryClient.StartOperation<DependencyTelemetry>($"{EnqueueOperationName} {entityPath}");
+            var operation = this.TelemetryClient.StartOperation<DependencyTelemetry>($"{EnqueueOperationName} {entityPath}");
             operation.Telemetry.Type = "Queue";
             operation.Telemetry.Target = $"{this.endpointUri.Host}/{entityPath}";
             operation.Telemetry.Data = EnqueueOperationName;
@@ -94,7 +93,7 @@
             brokeredMessage.UserProperties.Add(ParentIdName, operation.Telemetry.Id);
             brokeredMessage.UserProperties.Add(RootIdName, operation.Telemetry.Context.Operation.Id);
 
-            return new SendMessageScope(this.telemetryClient, operation);
+            return new SendMessageScope(this.TelemetryClient, operation);
         }
 
         /// <inheritdoc/>
@@ -132,9 +131,9 @@
             requestTelemetry.Properties.Add(nameof(Message.MessageId), brokeredMessage.MessageId);
             requestTelemetry.Url = new Uri($"{this.endpointUri.Host}/{entityPath}", UriKind.Relative);
 
-            var operation = this.telemetryClient.StartOperation(requestTelemetry);
+            var operation = this.TelemetryClient.StartOperation(requestTelemetry);
 
-            return new ProcessMessageScope(this.telemetryClient, operation);
+            return new ProcessMessageScope(this.TelemetryClient, operation);
         }
 
         /// <summary>
@@ -156,7 +155,7 @@
                 throw new ArgumentException("Entity path is null or empty.", nameof(entityPath));
             }
 
-            var operation = this.telemetryClient.StartOperation<DependencyTelemetry>($"{EnqueueOperationName} {entityPath}");
+            var operation = this.TelemetryClient.StartOperation<DependencyTelemetry>($"{EnqueueOperationName} {entityPath}");
             operation.Telemetry.Type = "Queue";
             operation.Telemetry.Target = $"{this.endpointUri.Host}/{entityPath}";
             operation.Telemetry.Data = EnqueueOperationName;
@@ -167,7 +166,7 @@
                 brokeredMessage.UserProperties.Add(RootIdName, operation.Telemetry.Context.Operation.Id);
             }
 
-            return new SendMessageScope(this.telemetryClient, operation);
+            return new SendMessageScope(this.TelemetryClient, operation);
         }
     }
 }

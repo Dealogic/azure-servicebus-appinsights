@@ -10,6 +10,13 @@ On sending a message a Dependency call telemetry will be registered, on receivin
 * [Use message scope explicitly](#use-message-scope)
 * [Implementation notes](#implementation-notes)
 
+## Build status and NuGet
+
+![build status](https://dealogic.visualstudio.com/DefaultCollection/_apis/public/build/definitions/4cd19643-db3a-4dcc-b481-76a7800dd64d/13165/badge)
+
+Download nuget from [Link](https://www.nuget.org/packages/Dealogic.ServiceBus.Azure.ApplicationInsights/)
+
+
 ### <a id="send-a-message" /> Send a message to a Service Bus entity
 
 Use the `SendMessageAsync` extension method (or the sync version) on the `ServiceBusTelemetryHelper` instance.
