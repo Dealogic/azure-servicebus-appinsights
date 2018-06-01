@@ -14,7 +14,7 @@ On sending a message a Dependency call telemetry will be registered, on receivin
 
 ![build status](https://dealogic.visualstudio.com/DefaultCollection/_apis/public/build/definitions/4cd19643-db3a-4dcc-b481-76a7800dd64d/13165/badge)
 
-Download nuget from [Link](https://www.nuget.org/packages/Dealogic.ServiceBus.Azure.ApplicationInsights/)
+[![NuGet Badge](https://buildstats.info/nuget/dealogic.servicebus.azure.applicationinsights)](https://www.nuget.org/packages/dealogic.servicebus.azure.applicationinsights/)
 
 
 ### <a id="send-a-message" /> Send a message to a Service Bus entity
